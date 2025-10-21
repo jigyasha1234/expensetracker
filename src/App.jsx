@@ -42,9 +42,36 @@ const categoryIconMap = {
 }
 
 export default function App() {
-  // non-persistent: wallet and expenses reset on refresh
-  const [wallet, setWallet] = useState(5000)
-  const [expenses, setExpenses] = useState([])
+  // persistent: wallet and expenses stored in localStorage under 'wallet' and 'expenses'
+  const [wallet, setWallet] = useState(() => {
+    try {
+      const raw = localStorage.getItem('wallet')
+      return raw ? JSON.parse(raw) : 5000
+    } catch (e) {
+      return 5000
+    }
+  })
+
+  const [expenses, setExpenses] = useState(() => {
+    try {
+      const raw = localStorage.getItem('expenses')
+      return raw ? JSON.parse(raw) : []
+    } catch (e) {
+      return []
+    }
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('wallet', JSON.stringify(wallet))
+    } catch (e) {}
+  }, [wallet])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('expenses', JSON.stringify(expenses))
+    } catch (e) {}
+  }, [expenses])
 
   const [incomeOpen, setIncomeOpen] = useState(false)
   const [expenseOpen, setExpenseOpen] = useState(false)
