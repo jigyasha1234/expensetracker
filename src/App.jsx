@@ -412,13 +412,19 @@ export default function App() {
               <TextField label="Title" name="title" value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} required />
               <TextField label="Amount" name="price" type="number" value={form.price} onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))} required />
               <FormControl fullWidth>
-                <InputLabel id="cat-label">Category</InputLabel>
-                <Select labelId="cat-label" label="Category" name="category" value={form.category} onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}>
-                  <MenuItem value="Food">Food</MenuItem>
-                  <MenuItem value="Entertainment">Entertainment</MenuItem>
-                  <MenuItem value="Travel">Travel</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
-                </Select>
+                <InputLabel htmlFor="category-native">Category</InputLabel>
+                <select
+                  id="category-native"
+                  name="category"
+                  value={form.category}
+                  onChange={(e) => setForm((f) => ({ ...f, category: e.target.value }))}
+                  style={{ width: '100%', padding: '10px', marginTop: '8px', borderRadius: 4 }}
+                >
+                  <option value="Food">Food</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Other">Other</option>
+                </select>
               </FormControl>
               <TextField label="Date" name="date" type="date" InputLabelProps={{ shrink: true }} value={form.date} onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))} required />
             </Stack>
